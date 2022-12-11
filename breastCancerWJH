@@ -1,0 +1,21 @@
+#Name: Will and Alejandro
+#Course: COMSC.230.01
+#Prof. Name: Prof. Rivera
+#Assignment (e.g. Homework # or Exam #): Final Project 
+#Program Name: breastCancerAnalysis
+#Program brief description: Loads up wisconsin breast cancer dataset and performs analysis on the data.
+
+import pandas as pd
+
+# Read in the dataset from a .data file
+df = pd.read_csv("https://github.com/willhurwitz123/Wisconsin-breast-cancer-data/blob/main/12874_2019_681_MOESM1_ESM.csv")
+
+# Format the columns
+df['column1'] = df['column1'].str.lower()
+df['column2'] = df['column2'].str.upper()
+df['column3'] = df['column3'].str.strip()
+df['column4'] = df['column4'].str.replace(",", "")
+df['column5'] = df['column5'].astype(int)
+
+# Perform statistical analysis on the data
+print(df.describe())
