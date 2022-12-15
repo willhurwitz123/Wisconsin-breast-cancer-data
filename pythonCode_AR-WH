@@ -1,17 +1,39 @@
+#Name: Will and Alejandro
+#Course: COMSC.230.01
+#Prof. Name: Prof. Rivera
+#Assignment (e.g. Homework # or Exam #): Final Project 
+#Program Name: breastCancerAnalysis
+#Program brief description: Loads up wisconsin breast cancer dataset and performs analysis on the data.
+
+import matplotlib_inline
+from matplotlib import pyplot as plt
 import pandas as pd
+import numpy as np
+# initialize variables
+dataM = 0
+dataB = 0
 # extracts csv into panda dataframe
 df = pd.read_csv('https://raw.githubusercontent.com/willhurwitz123/Wisconsin-breast-cancer-data/main/cancer.csv')
 # sets column name
 df.columns = ['ID', 'Diagnosis', 'Size','','','','','','','','','','','','','','','','','','','','','','','','','','','','','']
 # sets column index
 lf = df[['ID','Diagnosis','Size']]
-# for statement to get average of each type of Diagnosis
-for x in lf['Diagnosis']:
-    Avg = lf.groupby('Diagnosis').Size.mean()
-# using substring of Avg variable to set each diagnosis into its own string (averages confirmed in excel)
-Avg = str(Avg)
-avgM = Avg[29:38]
-avgB = Avg[14:25]
+# get count of each type of Diagnosis
+countM = int(lf.groupby('Diagnosis').get_group("M").shape[0])
+countB = int(lf.groupby('Diagnosis').get_group("B").shape[0])
+# grouping by diagnosis and setting variable to filtered dataframe
+dataM = lf[lf['Diagnosis'].str.contains('M')].Size
+dataB = lf[lf['Diagnosis'].str.contains('B')].Size
+# grouping by diagnosis and averaging size results
+avgM = lf.groupby('Diagnosis').get_group("M").Size.mean()
+avgB = lf.groupby('Diagnosis').get_group("B").Size.mean()
 # prints averages
-print('The Average size of a Malignant tumor is:' + avgM)
-print('The Average size of a Benign tumor is:' + avgB)
+print('The Average size of a Malignant tumor is: ' + str(avgM))
+print('The Average size of a Benign tumor is: ' + str(avgB))
+# prints the graph
+plt.hist([dataM,dataB])
+plt.suptitle('Malignant VS Benign Tumor size')
+plt.title('Size of tumor(s)')
+plt.xlabel('Radius')
+plt.ylabel('Number of Instances')
+plt.show()
