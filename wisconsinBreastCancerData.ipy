@@ -34,4 +34,6 @@ print('The Average size of a Benign tumor is:' + avgB)
 
 %matplotlib inline
 histogram = lf.hist('Size')
+plt.xlabel('Mean Radius')
+plt.ylabel('Number of Instances')
 plt.show()
