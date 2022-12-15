@@ -1,21 +1,17 @@
 import pandas as pd
 # extracts csv into panda dataframe
 df = pd.read_csv('https://raw.githubusercontent.com/willhurwitz123/Wisconsin-breast-cancer-data/main/cancer.csv')
-# sets column name to panda
+# sets column name
 df.columns = ['ID', 'Diagnosis', 'Size','','','','','','','','','','','','','','','','','','','','','','','','','','','','','']
+# sets column index
 lf = df[['ID','Diagnosis','Size']]
-# counts to validate amount of each diagnosis
-countM = 0
-countB = 0
-# counts each Malignant
+# for statement to get average of each type of Diagnosis
 for x in lf['Diagnosis']:
-    if(x == 'M'):
-        #print('Diagnosis is Bad!')
-        countM = countM + 1
-print(countM)
-# counts each Benign
-for x in lf['Diagnosis']:
-    if(x == 'B'):
-        #print('Diagnosis is Good!')
-        countB = countB + 1
-print(countB)
+    Avg = lf.groupby('Diagnosis').Size.mean()
+# using substring of Avg variable to set each diagnosis into its own string (averages confirmed in excel)
+Avg = str(Avg)
+avgM = Avg[29:38]
+avgB = Avg[14:25]
+# prints averages
+print('The Average size of a Malignant tumor is:' + avgM)
+print('The Average size of a Benign tumor is:' + avgB)
