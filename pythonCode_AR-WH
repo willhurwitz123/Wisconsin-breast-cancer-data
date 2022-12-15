@@ -28,8 +28,8 @@ dataB = lf[lf['Diagnosis'].str.contains('B')].Size
 avgM = lf.groupby('Diagnosis').get_group("M").Size.mean()
 avgB = lf.groupby('Diagnosis').get_group("B").Size.mean()
 # prints averages
-print('The Average size of a Malignant tumor is: ' + str(avgM) + 'mm')
-print('The Average size of a Benign tumor is: ' + str(avgB) + 'mm')
+print('The Average size of a Malignant tumor is: ' + str(avgM) + ' mm')
+print('The Average size of a Benign tumor is: ' + str(avgB) + ' mm')
 # prints the graph
 plt.hist([dataM,dataB])
 plt.suptitle('Malignant VS Benign Tumor size')
