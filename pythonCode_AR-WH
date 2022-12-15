@@ -1,0 +1,21 @@
+import pandas as pd
+# extracts csv into panda dataframe
+df = pd.read_csv('https://raw.githubusercontent.com/willhurwitz123/Wisconsin-breast-cancer-data/main/cancer.csv')
+# sets column name to panda
+df.columns = ['ID', 'Diagnosis', 'Size','','','','','','','','','','','','','','','','','','','','','','','','','','','','','']
+lf = df[['ID','Diagnosis','Size']]
+# counts to validate amount of each diagnosis
+countM = 0
+countB = 0
+# counts each Malignant
+for x in lf['Diagnosis']:
+    if(x == 'M'):
+        #print('Diagnosis is Bad!')
+        countM = countM + 1
+print(countM)
+# counts each Benign
+for x in lf['Diagnosis']:
+    if(x == 'B'):
+        #print('Diagnosis is Good!')
+        countB = countB + 1
+print(countB)
